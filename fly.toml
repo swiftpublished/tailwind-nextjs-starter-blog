@@ -1,12 +1,10 @@
-# fly.toml app configuration file generated for unknowndefault on 2023-11-10T08:14:53+05:30
+# fly.toml app configuration file generated for unknowndefault on 2023-11-10T11:22:16+05:30
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
 app = "unknowndefault"
 primary_region = "sin"
-
-[build]
 
 [http_service]
   internal_port = 3000

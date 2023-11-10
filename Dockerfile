@@ -1,7 +1,7 @@
 # syntax = docker/dockerfile:1
 
 # Adjust NODE_VERSION as desired
-ARG NODE_VERSION=20.8.1
+ARG NODE_VERSION=21.1.0
 FROM node:${NODE_VERSION}-slim as base
 
 LABEL fly_launch_runtime="Next.js"
@@ -11,11 +11,6 @@ WORKDIR /app
 
 # Set production environment
 ENV NODE_ENV="production"
-ARG YARN_VERSION=3.6.1
-
-# Install Yarn 3
-RUN corepack enable && \
-    yarn set version ${YARN_VERSION}
 
 
 # Throw-away build stage to reduce size of final image
@@ -27,7 +22,7 @@ RUN apt-get update -qq && \
 
 # Install node modules
 COPY --link .yarnrc.yml package.json yarn.lock ./
-RUN yarn install --immutable --production=false
+RUN yarn install --frozen-lockfile --production=false
 
 # Copy application code
 COPY --link . .
